@@ -1,6 +1,10 @@
 -- simple table to add more flex names to
 local flexCheck = {
 	"jaw_drop",
+	"jaw_open",
+	"jaw_down",
+	"MouthOpen",
+	"OpenMouth",
 	"left_part",
 	"right_part",
 	"left_mouth_drop",
