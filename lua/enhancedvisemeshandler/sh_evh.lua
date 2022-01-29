@@ -95,13 +95,13 @@ function Era_mouthMove(ply, reset)
 				if we need to reset then set the weight to 0
 				if the player is on the speaking list then get their voice volume
 			--]]
-			ply:SetFlexWeight(flexID, (not reset and Era_speakingPlys[ply] and math.Clamp(ply:GetNW2Float("VoiceVolume") * 5, 0, 2)) or 0)
+			--[[ply:SetFlexWeight(flexID, (not reset and Era_speakingPlys[ply] and math.Clamp(ply:GetNW2Float("VoiceVolume") * 5, 0, 2)) or 0)
 			if SERVER then 
 				side = "server"
 			else
 				side = "client"
 			end
-			print(ply:GetNW2Float("VoiceVolume"), side)
+			print(ply:GetNW2Float("VoiceVolume"), side)--]]
 			-- break the loop because we are done here
 			break
 		end
