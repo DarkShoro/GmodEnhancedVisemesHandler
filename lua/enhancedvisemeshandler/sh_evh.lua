@@ -3,6 +3,7 @@ local flexCheck = {
 	"jaw_drop",
 	"jaw_open",
 	"jaw_down",
+	"open_jaw",
 	"MouthOpen",
 	"OpenMouth",
 	"left_part",
@@ -66,7 +67,7 @@ local flexCheck = {
 }
 
 
-
+Era_ntstr = "Eradium.MouthMove.Update"
 -- a cached table of online players
 -- calling player.GetAll() constantly in a think hook is not efficient
 Eradium_MouthMove_player_list = Eradium_MouthMove_player_list or {}
@@ -88,27 +89,22 @@ function Era_mouthMove(ply, reset)
 	for i = 1, #flexCheck do
 		-- check to see if we have a flexid by name, if we do it will return a number if we do not it will return nil
 		local flexID = ply:GetFlexIDByName(flexCheck[i])
+
 		-- if we have a number pass if it is nil it will fail
-		if flexID then
+		-- we check to see if the name we are checking actually matches the name of the flex found
+		-- GetFlexIDByName seems to give the wrong id, I think it dosent compare the name but tries to do a match instead so "abcde" == "a" ???
+		if flexID and flexCheck[i] == ply:GetFlexName( flexID ) then
 			--[[
 				Sets the flex weights of the player here
 				if we need to reset then set the weight to 0
 				if the player is on the speaking list then get their voice volume
 			--]]
 			ply:SetFlexWeight(flexID, (not reset and Era_speakingPlys[ply] and math.Clamp(ply:GetNW2Float("VoiceVolume") * 5, 0, 2)) or 0)
-			if SERVER then 
-				side = "server"
-			else
-				side = "client"
-			end
-			print(ply:GetNW2Float("VoiceVolume"), side)
+
+			print(ply:GetNW2Float("VoiceVolume"), SERVER and "Server" or "Client")
 			-- break the loop because we are done here
 			break
 		end
 	end
 end
 -- this could prob be made faster by caching the model with the flex id so we can refer to that cached table first instead of trying to find the flex id every think call
--- ive done all i feel like doing so i don't really feel like doing more
-
-
-local updateSpeak
