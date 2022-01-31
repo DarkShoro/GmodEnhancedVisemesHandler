@@ -24,9 +24,9 @@ Code rewritten by Virtualraptor, thank you a lot ! ^^
 ]]--
 
 if SERVER then
-	AddCSLuaFile("enhancedvisemeshandler/sh_evh.lua")
-	include("enhancedvisemeshandler/sh_evh.lua")
 	include("enhancedvisemeshandler/sv_evh.lua")
+	include("enhancedvisemeshandler/sh_evh.lua")
+	AddCSLuaFile("enhancedvisemeshandler/sh_evh.lua")
 	AddCSLuaFile("enhancedvisemeshandler/cl_evh.lua")
 else
 	include("enhancedvisemeshandler/cl_evh.lua")
